@@ -26,14 +26,14 @@ train_datagen = ImageDataGenerator(rescale = 1./45
 
 test_datagen = ImageDataGenerator(rescale = 1./45)
 
-training_set = train_datagen.flow_from_directory('/Users/ghassanagaby/Desktop/output/train',
+training_set = train_datagen.flow_from_directory('path_to_training_set',
                                                  target_size = (48, 48),
                                                  batch_size = 64,
                                                  class_mode = 'categorical',
                                                  shuffle=True,
                                                  color_mode='grayscale')
 
-test_set = test_datagen.flow_from_directory('/Users/ghassanagaby/Desktop/output/test',
+test_set = test_datagen.flow_from_directory('path_to_test_set',
                                             target_size = (48, 48),
                                             batch_size = 64,
                                             class_mode = 'categorical',
