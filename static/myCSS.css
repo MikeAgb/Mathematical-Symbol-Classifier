@@ -1,0 +1,38 @@
+#visualizebutton{
+	padding: 15px 25px;
+    width: 150px;
+    height: 75px;   
+    background:#00FA9A;
+    border: black;
+    color:black;   
+    font-size:25px;
+    font-weight:700;
+    position: absolute;
+    top:70%;
+    left:47%;
+    box-shadow: 0 9px #a6a6a6;
+
+}
+
+#visualizebutton:hover{
+	background-color: #52BE80;
+}
+
+#visualizebutton:active{
+	top:70.8%;
+	box-shadow: 0 0px #a6a6a6;
+
+}
+
+#canvas{
+	display: block;
+    margin: 0 auto;
+}
+
+#linktogit{
+
+	bottom: 0;
+	position: fixed;
+	left:0%;
+
+}
