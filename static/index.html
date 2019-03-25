@@ -1,0 +1,173 @@
+<head>
+<h1 style="font-family:Impact; color:navy; font-size:60px" align="center">
+Math Visionz
+</h1>
+
+<h2>Write Your Equation below!</h2>
+
+<link rel="stylesheet" href="./static/myCSS.css">
+
+<div id="canvas"></div>
+
+<!--Clear and whoami buttons-->
+<input type ="button" style="color:blue; width:60px; height:30px" value="Clear" OnClick=document.location.reload(true)>
+<button onclick="typer()" style="color:blue;">Who am I?</button>
+<script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script>
+
+
+</head>
+
+
+<body style="background-color:#7FDBFF;">
+
+
+<!--Crreate the canvas-->
+<script>
+canvasDiv = document.getElementById('canvas');
+var canvas = document.createElement('canvas');
+canvas.setAttribute('width', '1000');
+canvas.setAttribute('height', '250');
+canvas.setAttribute('id', 'canvas');
+canvas.style.border = "thin solid black";
+canvas.style.backgroundColor = "white";
+canvasDiv.appendChild(canvas);
+if(typeof G_vmlCanvasManager != 'undefined') {
+	canvas = G_vmlCanvasManager.initElement(canvas);
+}
+context = canvas.getContext("2d");
+
+
+$('#canvas').mousedown(function(e){
+  var rect = canvas.getBoundingClientRect();
+  var mouseX = e.pageX-rect.left;
+  var mouseY = e.pageY-rect.top;
+		
+  paint = true;
+  addClick(e.pageX-rect.left, e.pageY-rect.top);
+  redraw();
+});
+
+
+$('#canvas').mousemove(function(e){
+  var rect = canvas.getBoundingClientRect(); //new
+  if(paint){
+    addClick(e.pageX-rect.left, e.pageY-rect.top, true);
+    redraw();
+  }
+});
+
+
+$('#canvas').mouseup(function(e){
+  paint = false;
+});
+
+
+$('#canvas').mouseleave(function(e){
+  paint = false;
+});
+
+
+
+var clickX = new Array();
+var clickY = new Array();
+var clickDrag = new Array();
+var paint;
+
+
+function addClick(x, y, dragging)
+{
+  clickX.push(x);
+  clickY.push(y);
+  clickDrag.push(dragging);
+
+}
+
+function redraw(){
+
+  context.clearRect(0, 0, context.canvas.width, context.canvas.height);
+  context.lineJoin = "round";
+  context.lineWidth = 3;
+  context.fillStyle="#ffffff";
+  context.fillRect(0,0,canvas.width,canvas.height);
+  canvas.style.opacity='1';
+
+
+			
+  for(var i=0; i < clickX.length; i++) {
+    context.strokeStyle="black";		
+    context.beginPath();
+    if(clickDrag[i] && i){
+      context.moveTo(clickX[i-1], clickY[i-1]);
+     }else{
+       context.moveTo(clickX[i]-1, clickY[i]);
+     }
+     context.lineTo(clickX[i], clickY[i]);
+     context.closePath();
+     context.stroke();
+  }
+}
+</script>
+
+<script>
+var index = 0;
+var text = "Welcome to Math Visionz! A powerful bot that uses AI to detect handwritten equations!";
+
+
+//Type to screen when Who am I is pressed
+function typer(){
+  var screenEl = $('#screen');
+  screenEl.html(text.substr(0, index++));
+
+  if (index < text.length) {
+    
+    setTimeout('typer()', 70);
+  } else {
+    // Reset and restart.
+    index = 0;
+    text = '';
+  }
+};
+
+</script>
+
+  <script type="text/javascript">
+     
+    function visualise(){
+
+      var $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+      var canvasObj = document.getElementsByTagName('canvas')[0];
+      var img = canvasObj.toDataURL();
+      
+      $.ajax({
+        type: "POST",
+        url: $SCRIPT_ROOT + "/predict/",
+        data: img,
+        success: function(data){
+          alert(data);
+          $('#result').text(' Predicted Output: '+data);
+        }
+
+      });
+    }
+     
+
+   
+  </script>
+
+
+<!--Visualise button, calls the predict function-->
+<button id = "visualizeButton" style="font-family:Impact" onClick="visualise()">VISUALIZE</button>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+<p id="screen"></p>
+
+
+
+</body>
+
+
+<img src="./static/logo.png">
+
+
+<!--Link to github repo-->
+<a href ="https://github.com/MikeAgb/Mathematical-Symbol-Classifier" id="linktogit">See the GitHub repo!</a>
