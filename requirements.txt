@@ -1,0 +1,9 @@
+scipy==1.1.0
+matplotlib==2.2.3
+Keras==2.2.4
+scikit_image==0.14.0
+Flask==1.0.2
+numpy==1.15.4
+opencv_python==4.0.0.21
+skimage==0.0
+tensorflow==1.13.1
