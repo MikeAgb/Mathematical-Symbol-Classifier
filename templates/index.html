@@ -9,20 +9,23 @@ Math Visionz
 
 <div id="canvas"></div>
 
-<!--Clear and whoami buttons-->
-<input type ="button" style="color:blue; width:60px; height:30px" value="Clear" OnClick=document.location.reload(true)>
-<button onclick="typer()" style="color:blue;">Who am I?</button>
-<script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script>
 
+<!--Buttons for clear and who am I-->
+<input type ="button" style="color:blue; width:60px; height:30px" value="Clear" OnClick=document.location.reload(true)>
+
+<button onclick="typer()" style="color:blue;">Who am I?</button>
+
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script>
 
 </head>
 
 
 <body style="background-color:#7FDBFF;">
 
-
-<!--Crreate the canvas-->
+<!--Create canvas-->
 <script>
+
 canvasDiv = document.getElementById('canvas');
 var canvas = document.createElement('canvas');
 canvas.setAttribute('width', '1000');
@@ -82,6 +85,7 @@ function addClick(x, y, dragging)
 
 }
 
+
 function redraw(){
 
   context.clearRect(0, 0, context.canvas.width, context.canvas.height);
@@ -106,15 +110,16 @@ function redraw(){
      context.stroke();
   }
 }
+
 </script>
 
+<!--Outputs a message when who am I is clicked-->
 <script>
 var index = 0;
 var text = "Welcome to Math Visionz! A powerful bot that uses AI to detect handwritten equations!";
 
-
-//Type to screen when Who am I is pressed
 function typer(){
+
   var screenEl = $('#screen');
   screenEl.html(text.substr(0, index++));
 
@@ -128,22 +133,25 @@ function typer(){
   }
 };
 
+
 </script>
 
-  <script type="text/javascript">
+
+<!--call the predict method when visualize is pressed-->
+<script type="text/javascript">
      
     function visualise(){
 
       var $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
       var canvasObj = document.getElementsByTagName('canvas')[0];
       var img = canvasObj.toDataURL();
-      
+
       $.ajax({
         type: "POST",
         url: $SCRIPT_ROOT + "/predict/",
         data: img,
         success: function(data){
-          alert(data);
+
           $('#result').text(' Predicted Output: '+data);
         }
 
@@ -155,19 +163,25 @@ function typer(){
   </script>
 
 
-<!--Visualise button, calls the predict function-->
+<!--Button for visualiation-->
 <button id = "visualizeButton" style="font-family:Impact" onClick="visualise()">VISUALIZE</button>
+
+
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
 <p id="screen"></p>
 
-
-
 </body>
 
-
+<!--Math Visionz logo -->
 <img src="./static/logo.png">
 
 
-<!--Link to github repo-->
+<!--ling to github-->
 <a href ="https://github.com/MikeAgb/Mathematical-Symbol-Classifier" id="linktogit">See the GitHub repo!</a>
+
+
+
+
+
