@@ -1,5 +1,5 @@
 # Mathematical-Symbol-Classifier
 
-This project is cbeing completed in the context of the Mcgill AI society's Machine Learning Bootcamp.
+Math Visionz allows the user to draw mathematical equations directly into the browser and for the input to beformated into Latex code.
 
-My goal is to create a web application that will be able to detect handwritten mathematical symbols in equations, classifiy them, and output them in latex format. 
+To run the project, simply clone the repository, ensuring that all the requirements are installed. Simpply run app.py from the command line to set up the application on your browser. Alternatively, you can visit the website at: 
