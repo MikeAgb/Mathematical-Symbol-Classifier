@@ -6,4 +6,4 @@ Flask==1.0.2
 numpy==1.15.4
 opencv_python==4.0.0.21
 skimage==0.0
-tensorflow==1.13.1
+tensorflow==2.3.1
